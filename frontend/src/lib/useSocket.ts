@@ -10,8 +10,6 @@ export function useSocket() {
       withCredentials: true,
     });
     
-    console.log('hey there');
-    
     socketRef.current.on('connect', () => {
       console.log('Socket connected:', socketRef.current.id);
     });
