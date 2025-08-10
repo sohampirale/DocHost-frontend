@@ -3,31 +3,32 @@
 import axios from "axios"
 import { useState } from "react"
 
-export default function UserSignin(){
+export default function InstanceSignup(){
   const [username,setUsername] = useState("")
   const [password,setPassword] = useState("")
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
-  async function handleUserSignin(){  
+  async function handleInstanceSignup(){  
     try {
-      const {data:response} = await axios.post(`${backendUrl}/user/signin`,{
+      const {data:response} = await axios.post(`${backendUrl}/instance/signup`,{
         username,
         password
       }, {
         withCredentials: true  
-      })    
+      })          
+      console.log('DOCKHOST_API_KEY : ',response.data.DOCKHOST_API_KEY);
       
     } catch (error) {
-      console.log('Failed to signin user : ',error?.response??error);
+      console.log('Failed to signup instance : ',error?.response??error);
     }
   }
 
   return (
     <>
-      <p>User Signin</p>
+      <p>Instance Signup</p>
       <input type="text" value={username} onChange={(e)=>setUsername(e.target.value)}/>
       <input type="text" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-      <button onClick={handleUserSignin}>Sign In</button>
+      <button onClick={handleInstanceSignup}>Signup</button>
     </>
   )
 }

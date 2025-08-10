@@ -6,7 +6,10 @@ export function useSocket() {
   const socketRef = useRef();
 
   useEffect(() => {
-    socketRef.current = io(process.env.NEXT_PUBLIC_BACKEND_URL, {
+    socketRef.current = io(`${process.env.NEXT_PUBLIC_BACKEND_URL}`, {
+      query:{
+        role:"client"
+      },
       withCredentials: true,
     });
     
